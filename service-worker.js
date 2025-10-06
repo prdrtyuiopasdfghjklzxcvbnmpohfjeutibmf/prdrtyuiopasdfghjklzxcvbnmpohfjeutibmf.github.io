@@ -1,9 +1,9 @@
 // public/service-worker.js — self-unregistering SW
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
@@ -11,7 +11,7 @@ self.addEventListener('activate', (event) => {
       await self.registration.unregister();
 
       const clientsArr = await self.clients.matchAll({
-        type: 'window',
+        type: "window",
         includeUncontrolled: true,
       });
       clientsArr.forEach((client) => client.navigate(client.url));
@@ -19,4 +19,4 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-self.addEventListener('fetch', () => {});
+self.addEventListener("fetch", () => {});
